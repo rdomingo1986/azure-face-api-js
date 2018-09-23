@@ -347,13 +347,50 @@ let azurefaceapi = (() => {
       }
     },
     PersonGroup: {
-      create: () => {},
-      delete: () => {},
-      get: () => {},
-      getTrainingStatus: () => {},
-      list: () => {},
-      train: () => {},
-      update: () => {}
+      create: (params) => {
+        return _executeHttpRequest({
+          method: 'PUT',
+          action: `persongroups/${params.requestParameters.personGroupId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      },
+      delete: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `persongroups/${params.requestParameters.personGroupId}`
+        });
+      },
+      get: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `persongroups/${params.requestParameters.personGroupId}`
+        });
+      },
+      getTrainingStatus: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `persongroups/${params.requestParameters.personGroupId}/training`
+        });
+      },
+      list: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `persongroups${_buildUrlParamsString(params)}`
+        });
+      },
+      train: (params) => {
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `persongroups/${params.requestParameters.personGroupId}/train`
+        });
+      },
+      update: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `persongroups/${params.requestParameters.personGroupId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      }
     },
     PersonGroupPerson: {
       addFace: () => {},
