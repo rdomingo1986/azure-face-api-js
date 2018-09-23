@@ -278,15 +278,73 @@ let azurefaceapi = (() => {
       }
     },
     LargePersonGroupPerson: {
-      addFace: () => {},
-      create: () => {},
-      delete: () => {},
-      deleteFace: () => {},
-      get: () => {},
-      getFace: () => {},
-      list: () => {},
-      update: () => {},
-      updateFace: () => {}
+      addFace: (params) => {
+        let largePersonGroupId = params.requestParameters.largePersonGroupId;
+        let personId = params.requestParameters.personId;
+        delete params.requestParameters.largePersonGroupId;
+        delete params.requestParameters.personId;
+
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `largepersongroups/${largePersonGroupId}/persons/${personId}/persistedfaces/${_buildUrlParamsString(params)}`, 
+          body: JSON.stringify(params.requestBody), // ¿binary data implementation?
+          contentType: params.contentType == undefined ? _contentType : params.contentType
+        });
+      },
+      create: (params) => {
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `largepersongroups/${largePersonGroupId}/persons`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      },
+      delete: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}`
+        });
+      },
+      deleteFace: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}/persistedfaces/${params.requestParameters.persistedFaceId}`
+        });
+      },
+      get: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}`
+        });
+      },
+      getFace: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}/persistedfaces/${params.requestParameters.persistedFaceId}`
+        });
+      },
+      list: (params) => {
+        let largePersonGroupId = params.requestParameters.largePersonGroupId;
+        delete params.requestParameters.largePersonGroupId;
+
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups/${largePersonGroupId}/persons${_buildUrlParamsString(params)}`
+        });
+      },
+      update: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}`,
+          body: JSON.stringify(params.requestBody)
+        });
+      },
+      updateFace: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/persons/${params.requestParameters.personId}/persistedfaces/${params.requestParameters.persistedFaceId}`,
+          body: JSON.stringify(params.requestBody)
+        });
+      }
     },
     PersonGroup: {
       create: () => {},
