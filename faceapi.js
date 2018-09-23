@@ -102,7 +102,7 @@ let azurefaceapi = (() => {
 
         return _executeHttpRequest({
           method: 'POST',
-          action: `facelists/${params.requestParameters.faceListId}/persistedFaces${_buildUrlParamsString(params)}`, 
+          action: `facelists/${faceListId}/persistedfaces${_buildUrlParamsString(params)}`, 
           body: JSON.stringify(params.requestBody), // ¿binary data implementation?
           contentType: params.contentType == undefined ? _contentType : params.contentType
         });
@@ -123,7 +123,7 @@ let azurefaceapi = (() => {
       deleteFace: (params) => {
         return _executeHttpRequest({
           method: 'DELETE',
-          action: `facelists/${params.requestParameters.faceListId}/persistedFaces/${params.requestParameters.persistedFaceId}`
+          action: `facelists/${params.requestParameters.faceListId}/persistedfaces/${params.requestParameters.persistedFaceId}`
         });
       },
       get: (params) => {
@@ -138,7 +138,7 @@ let azurefaceapi = (() => {
           action: `facelists`
         });
       },
-      update: () => {
+      update: (params) => {
         return _executeHttpRequest({
           method: 'PATCH',
           action: `facelists/${params.requestParameters.faceListId}`,
@@ -147,18 +147,89 @@ let azurefaceapi = (() => {
       }
     },
     LargeFaceList: {
-      addFace: () => {},
-      create: () => {},
-      delete: () => {},
-      deleteFace: () => {},
-      get: () => {},
-      getFace: () => {},
-      getTrainingStatus: () => {},
-      list: () => {},
-      listFace: () => {},
-      train: () => {},
-      update: () => {},
-      updateFace: () => {}
+      addFace: (params) => {
+        let largeFaceListId = params.requestParameters.largeFaceListId;
+        delete params.requestParameters.largeFaceListId;
+
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `largefacelists/${largeFaceListId}/persistedfaces${_buildUrlParamsString(params)}`, 
+          body: JSON.stringify(params.requestBody), // ¿binary data implementation?
+          contentType: params.contentType == undefined ? _contentType : params.contentType
+        });
+      },
+      create: (params) => {
+        return _executeHttpRequest({
+          method: 'PUT',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}`, 
+          body: JSON.stringify(params.requestBody) // ¿binary data implementation?
+        });
+      },
+      delete: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}`
+        });
+      },
+      deleteFace: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}/persistedfaces/${params.requestParameters.persistedFaceId}`
+        });
+      },
+      get: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}`
+        });
+      },
+      getFace: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}/persistedfaces/${params.requestParameters.persistedFaceId}`
+        });
+      },
+      getTrainingStatus: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}/training`
+        });
+      },
+      list: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largefacelists${_buildUrlParamsString(params)}`
+        });
+      },
+      listFace: (params) => {
+        let largeFaceListId = params.requestParameters.largeFaceListId;
+        delete params.requestParameters.largeFaceListId;
+
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largefacelists/${largeFaceListId}/persistedfaces${_buildUrlParamsString(params)}`
+        });
+      },
+      train: (params) => {
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}/train`
+        });
+      },
+      update: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      },
+      updateFace: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `largefacelists/${params.requestParameters.largeFaceListId}/persistedfaces/${params.requestParameters.persistedFaceId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      }
     },
     LargePersonGroup: {
       create: () => {},
