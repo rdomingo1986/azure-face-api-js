@@ -65,8 +65,6 @@ let azurefaceapi = (() => {
         return _executeHttpRequest('findsimilars', JSON.stringify(params.requestBody));
       },
       group: (params) => {
-        _baseValidation();
-
         return _executeHttpRequest('group', JSON.stringify(params.requestBody));
       },
       identify: (params) => {
