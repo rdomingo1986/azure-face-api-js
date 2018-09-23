@@ -27,17 +27,17 @@ let azurefaceapi = (() => {
     return urlParamsString.substring(0, urlParamsString.length - 1);
   };
 
-  let _executeHttpRequest = (resource, data, contentType = _contentType, method = 'POST') => {
+  let _executeHttpRequest = (params) => {
     _baseValidation();
 
     return new Promise((resolve, reject) => {
-      fetch(`${_baseURL}/${resource}`, {
-        method: method,
+      fetch(`${_baseURL}/${params.action}`, {
+        method: params.method,
         headers: {
-          'Content-type': contentType,
+          'Content-type': params.contentType == undefined ? _contentType : params.contentType,
           'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
         },
-        body: data
+        body: params.body
       })
       .then((response) => {
         return response.json();
@@ -59,19 +59,40 @@ let azurefaceapi = (() => {
     },
     Face: {
       detect: (params) => {
-        return _executeHttpRequest(`detect${_buildUrlParamsString(params)}`, JSON.stringify(params.requestBody), params.contentType == undefined ? _contentType : params.contentType);
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `detect${_buildUrlParamsString(params)}`, 
+          body: JSON.stringify(params.requestBody), // ¿binary data implementation?
+          contentType: params.contentType == undefined ? _contentType : params.contentType
+        });
       },
       findSimilar: (params) => {
-        return _executeHttpRequest('findsimilars', JSON.stringify(params.requestBody));
+        return _executeHttpRequest({
+          method: 'POST',
+          action: 'findsimilars', 
+          body: JSON.stringify(params.requestBody)
+        });
       },
       group: (params) => {
-        return _executeHttpRequest('group', JSON.stringify(params.requestBody));
+        return _executeHttpRequest({
+          method: 'POST',
+          action: 'group', 
+          body: JSON.stringify(params.requestBody)
+        });
       },
       identify: (params) => {
-        return _executeHttpRequest('identify', JSON.stringify(params.requestBody));
+        return _executeHttpRequest({
+          method: 'POST',
+          action: 'identify', 
+          body: JSON.stringify(params.requestBody)
+        });
       },
       verify: (params) => {
-        return _executeHttpRequest('verify', JSON.stringify(params.requestBody));
+        return _executeHttpRequest({
+          method: 'POST',
+          action: 'verify', 
+          body: JSON.stringify(params.requestBody)
+        });
       }
     },
     FaceList: {
