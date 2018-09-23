@@ -73,6 +73,69 @@ let azurefaceapi = (() => {
       verify: (params) => {
         return _executeHttpRequest('verify', JSON.stringify(params.requestBody));
       }
+    },
+    FaceList: {
+      addFace: () => {},
+      create: () => {},
+      delete: () => {},
+      deleteFace: () => {},
+      get: () => {},
+      list: () => {},
+      update: () => {}
+    },
+    LargeFaceList: {
+      addFace: () => {},
+      create: () => {},
+      delete: () => {},
+      deleteFace: () => {},
+      get: () => {},
+      getFace: () => {},
+      getTrainingStatus: () => {},
+      list: () => {},
+      listFace: () => {},
+      train: () => {},
+      update: () => {},
+      updateFace: () => {}
+    },
+    LargePersonGroup: {
+      create: () => {},
+      delete: () => {},
+      get: () => {},
+      getTrainingStatus: () => {},
+      list: () => {},
+      train: () => {},
+      update: () => {}
+    },
+    LargePersonGroupPerson: {
+      addFace: () => {},
+      create: () => {},
+      delete: () => {},
+      deleteFace: () => {},
+      get: () => {},
+      getFace: () => {},
+      list: () => {},
+      update: () => {},
+      updateFace: () => {}
+    },
+    PersonGroup: {
+      create: () => {},
+      delete: () => {},
+      get: () => {},
+      getTrainingStatus: () => {},
+      list: () => {},
+      train: () => {},
+      update: () => {}
+    },
+    PersonGroupPerson: {
+      addFace: () => {},
+      create: () => {},
+      delete: () => {},
+      deleteFace: () => {},
+      get: () => {},
+      getFace: () => {},
+      list: () => {},
+      update: () => {},
+      updateFace: () => {}
     }
   };
 })();
