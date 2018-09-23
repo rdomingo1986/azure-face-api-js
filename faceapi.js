@@ -232,13 +232,50 @@ let azurefaceapi = (() => {
       }
     },
     LargePersonGroup: {
-      create: () => {},
-      delete: () => {},
-      get: () => {},
-      getTrainingStatus: () => {},
-      list: () => {},
-      train: () => {},
-      update: () => {}
+      create: (params) => {
+        return _executeHttpRequest({
+          method: 'PUT',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      },
+      delete: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}`
+        });
+      },
+      get: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}`
+        });
+      },
+      getTrainingStatus: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/training`
+        });
+      },
+      list: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `largepersongroups${_buildUrlParamsString(params)}`
+        });
+      },
+      train: (params) => {
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}/train`
+        });
+      },
+      update: (params) => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `largepersongroups/${params.requestParameters.largePersonGroupId}`, 
+          body: JSON.stringify(params.requestBody)
+        });
+      }
     },
     LargePersonGroupPerson: {
       addFace: () => {},
