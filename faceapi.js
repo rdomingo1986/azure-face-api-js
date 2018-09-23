@@ -7,53 +7,23 @@ let azurefaceapi = (() => {
 
   let _contentType = 'application/json';
 
-  // let _face = {
-  //   requestParameters: {
-  //     returnFaceId: {
-  //       type: 'boolean',
-  //       default: true
-  //     },
-  //     returnFaceLandmarks: {
-  //       type: 'boolean',
-  //       default: false
-  //     },
-  //     returnFaceAttributes: {
-  //       type: 'string',
-  //       regex: '',
-  //       acceptedValues: [
-  //         'age',
-  //         'gender',
-  //         'headPose',
-  //         'smile',
-  //         'facialHair',
-  //         'glasses',
-  //         'emotion',
-  //         'hair',
-  //         'makeup',
-  //         'occlusion',
-  //         'accessories',
-  //         'blur',
-  //         'exposure',
-  //         'noise'
-  //       ],
-  //       default: ''
-  //     }
-  //   },
-  //   requestBody: {
-  //     url: {
-  //       type: 'string',
-  //       regex: '',
-  //       default: ''
-  //     }
-  //   }
-  // };
+  let _buildUrlParamsString = (params) => {
+    let urlParamsString = '';
+    if(params.requestParameters != undefined) {
+      urlParamsString += '?';
+      for(let key in params.requestParameters) {
+        urlParamsString += `${key}=${params.requestParameters[key]}&`
+      }
+    }
+    return urlParamsString.substring(0, urlParamsString.length - 1);
+  };
 
   let _baseValidation = () => {
     if(_baseURL == '') {
-      throw 'Base URL is required.'
+      throw 'Base URL is required.';
     }
     if(_ocpApimSubscriptionKey == '') {
-      throw 'Subscription Key is required.'
+      throw 'Subscription Key is required.';
     }
   };
 
@@ -67,14 +37,16 @@ let azurefaceapi = (() => {
       detect: (params) => {
         _baseValidation();
 
+        let urlParams = _buildUrlParamsString(params);
+
         return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/detect`, {
+          fetch(`${_baseURL}/detect${urlParams}`, {
             method: 'POST',
             headers: {
-              'Content-type': 'application/json',
+              'Content-type': params.contentType == undefined ? _contentType : params.contentType,
               'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
             },
-            body: JSON.stringify(params)
+            body: JSON.stringify({url: params.requestBody.url})
           })
           .then((response) => {
             return response.json();
