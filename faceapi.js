@@ -96,13 +96,55 @@ let azurefaceapi = (() => {
       }
     },
     FaceList: {
-      addFace: () => {},
-      create: () => {},
-      delete: () => {},
-      deleteFace: () => {},
-      get: () => {},
-      list: () => {},
-      update: () => {}
+      addFace: (params) => {
+        let faceListId = params.requestParameters.faceListId;
+        delete params.requestParameters.faceListId;
+
+        return _executeHttpRequest({
+          method: 'POST',
+          action: `facelists/${params.requestParameters.faceListId}/persistedFaces${_buildUrlParamsString(params)}`, 
+          body: JSON.stringify(params.requestBody), // ¿binary data implementation?
+          contentType: params.contentType == undefined ? _contentType : params.contentType
+        });
+      },
+      create: (params) => {
+        return _executeHttpRequest({
+          method: 'PUT',
+          action: `facelists/${params.requestParameters.faceListId}`, 
+          body: JSON.stringify(params.requestBody) // ¿binary data implementation?
+        });
+      },
+      delete: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `facelists/${params.requestParameters.faceListId}`
+        });
+      },
+      deleteFace: (params) => {
+        return _executeHttpRequest({
+          method: 'DELETE',
+          action: `facelists/${params.requestParameters.faceListId}/persistedFaces/${params.requestParameters.persistedFaceId}`
+        });
+      },
+      get: (params) => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `facelists/${params.requestParameters.faceListId}`
+        });
+      },
+      list: () => {
+        return _executeHttpRequest({
+          method: 'GET',
+          action: `facelists`
+        });
+      },
+      update: () => {
+        return _executeHttpRequest({
+          method: 'PATCH',
+          action: `facelists/${params.requestParameters.faceListId}`,
+          body: JSON.stringify(params.requestBody)
+        });
+      }
     },
     LargeFaceList: {
       addFace: () => {},
