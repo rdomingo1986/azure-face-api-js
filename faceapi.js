@@ -59,17 +59,97 @@ let azurefaceapi = (() => {
           })
         });
       },
-      findSimilar: () => {
+      findSimilar: (params) => {
+        _baseValidation();
 
+        return new Promise((resolve, reject) => {
+          fetch(`${_baseURL}/findsimilars`, {
+            method: 'POST',
+            headers: {
+              'Content-type': _contentType,
+              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
+            },
+            body: JSON.stringify(params.requestBody)
+          })
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+            resolve(json);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        });
       },
-      group: () => {
+      group: (params) => {
+        _baseValidation();
 
+        return new Promise((resolve, reject) => {
+          fetch(`${_baseURL}/group`, {
+            method: 'POST',
+            headers: {
+              'Content-type': _contentType,
+              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
+            },
+            body: JSON.stringify(params.requestBody)
+          })
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+            resolve(json);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        });
       },
-      identify: () => {
+      identify: (params) => {
+        _baseValidation();
 
+        return new Promise((resolve, reject) => {
+          fetch(`${_baseURL}/identify`, {
+            method: 'POST',
+            headers: {
+              'Content-type': _contentType,
+              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
+            },
+            body: JSON.stringify(params.requestBody)
+          })
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+            resolve(json);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        });
       },
-      verify: () => {
+      verify: (params) => {
+        _baseValidation();
 
+        return new Promise((resolve, reject) => {
+          fetch(`${_baseURL}/verify`, {
+            method: 'POST',
+            headers: {
+              'Content-type': _contentType,
+              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
+            },
+            body: JSON.stringify(params.requestBody)
+          })
+          .then((response) => {
+            return response.json();
+          })
+          .then((json) => {
+            resolve(json);
+          })
+          .catch((error) => {
+            reject(error);
+          })
+        });
       }
     }
   };
