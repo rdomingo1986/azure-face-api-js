@@ -7,6 +7,15 @@ let azurefaceapi = (() => {
 
   let _contentType = 'application/json';
 
+  let _baseValidation = () => {
+    if(_baseURL == '') {
+      throw 'Base URL is required.';
+    }
+    if(_ocpApimSubscriptionKey == '') {
+      throw 'Subscription Key is required.';
+    }
+  };
+
   let _buildUrlParamsString = (params) => {
     let urlParamsString = '';
     if(params.requestParameters != undefined) {
@@ -18,13 +27,28 @@ let azurefaceapi = (() => {
     return urlParamsString.substring(0, urlParamsString.length - 1);
   };
 
-  let _baseValidation = () => {
-    if(_baseURL == '') {
-      throw 'Base URL is required.';
-    }
-    if(_ocpApimSubscriptionKey == '') {
-      throw 'Subscription Key is required.';
-    }
+  let _executeHttpRequest = (resource, data, contentType = _contentType, method = 'POST') => {
+    _baseValidation();
+
+    return new Promise((resolve, reject) => {
+      fetch(`${_baseURL}/${resource}`, {
+        method: method,
+        headers: {
+          'Content-type': contentType,
+          'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
+        },
+        body: data
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        resolve(json);
+      })
+      .catch((error) => {
+        reject(error);
+      })
+    });
   };
 
   return {
@@ -35,121 +59,21 @@ let azurefaceapi = (() => {
     },
     Face: {
       detect: (params) => {
-        _baseValidation();
-
-        let urlParams = _buildUrlParamsString(params);
-
-        return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/detect${urlParams}`, {
-            method: 'POST',
-            headers: {
-              'Content-type': params.contentType == undefined ? _contentType : params.contentType,
-              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
-            },
-            body: JSON.stringify({url: params.requestBody.url})
-          })
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            resolve(json);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-        });
+        return _executeHttpRequest(`detect${_buildUrlParamsString(params)}`, JSON.stringify(params.requestBody), params.contentType == undefined ? _contentType : params.contentType);
       },
       findSimilar: (params) => {
-        _baseValidation();
-
-        return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/findsimilars`, {
-            method: 'POST',
-            headers: {
-              'Content-type': _contentType,
-              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
-            },
-            body: JSON.stringify(params.requestBody)
-          })
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            resolve(json);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-        });
+        return _executeHttpRequest('findsimilars', JSON.stringify(params.requestBody));
       },
       group: (params) => {
         _baseValidation();
 
-        return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/group`, {
-            method: 'POST',
-            headers: {
-              'Content-type': _contentType,
-              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
-            },
-            body: JSON.stringify(params.requestBody)
-          })
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            resolve(json);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-        });
+        return _executeHttpRequest('group', JSON.stringify(params.requestBody));
       },
       identify: (params) => {
-        _baseValidation();
-
-        return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/identify`, {
-            method: 'POST',
-            headers: {
-              'Content-type': _contentType,
-              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
-            },
-            body: JSON.stringify(params.requestBody)
-          })
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            resolve(json);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-        });
+        return _executeHttpRequest('identify', JSON.stringify(params.requestBody));
       },
       verify: (params) => {
-        _baseValidation();
-
-        return new Promise((resolve, reject) => {
-          fetch(`${_baseURL}/verify`, {
-            method: 'POST',
-            headers: {
-              'Content-type': _contentType,
-              'Ocp-Apim-Subscription-Key': _ocpApimSubscriptionKey
-            },
-            body: JSON.stringify(params.requestBody)
-          })
-          .then((response) => {
-            return response.json();
-          })
-          .then((json) => {
-            resolve(json);
-          })
-          .catch((error) => {
-            reject(error);
-          })
-        });
+        return _executeHttpRequest('verify', JSON.stringify(params.requestBody));
       }
     }
   };

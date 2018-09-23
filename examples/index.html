@@ -9,9 +9,9 @@
 <body>
   <script src="../faceapi.js"></script>
   <script>
-    let face = azurefaceapi.config('https://southcentralus.api.cognitive.microsoft.com/face/v1.0', '0328672ce40b421f8b2ec53b76101b19');
+    azurefaceapi.config('https://southcentralus.api.cognitive.microsoft.com/face/v1.0', '0328672ce40b421f8b2ec53b76101b19');
     
-    face.Face.detect({
+    azurefaceapi.Face.detect({
       requestBody: {
         url: 'https://rdomingo1986.blob.core.windows.net/faceapitests/25158438_10155380723572858_2206683014845430559_n.jpg'
       },
