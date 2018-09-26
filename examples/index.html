@@ -11,15 +11,34 @@
   <script>
     azurefaceapi.config('https://southcentralus.api.cognitive.microsoft.com/face/v1.0', '0328672ce40b421f8b2ec53b76101b19');
     
-    azurefaceapi.Face.detect({
-      requestBody: {
-        url: 'https://rdomingo1986.blob.core.windows.net/faceapitests/25158438_10155380723572858_2206683014845430559_n.jpg'
-      },
-      requestParameters: {
-        returnFaceAttributes: 'age,gender',
-        returnFaceLandmarks: true
-      }
-    })
+    // azurefaceapi.Face.detect({
+    //   requestBody: {
+    //     url: 'https://rdomingo1986.blob.core.windows.net/faceapitests/25158438_10155380723572858_2206683014845430559_n.jpg'
+    //   }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
+
+    // azurefaceapi.FaceList.create({
+    //   requestBody: {
+    //     name: 'ExampleList'
+    //   },
+    //   requestParameters: {
+    //     faceListId: 'prueba1111'
+    //   }
+    // })
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
+
+    azurefaceapi.FaceList.list()
     .then((response) => {
       console.log(response);
     })

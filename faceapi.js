@@ -40,10 +40,13 @@ let azurefaceapi = (() => {
         body: params.body
       })
       .then((response) => {
-        return response.json();
+        return response.text();
       })
-      .then((json) => {
-        resolve(json);
+      .then((text) => {
+        if(text.length === 0) {
+          resolve();
+        } 
+        resolve(JSON.parse(text));
       })
       .catch((error) => {
         reject(error);
