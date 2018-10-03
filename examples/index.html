@@ -7,21 +7,27 @@
   <title>Document</title>
 </head>
 <body>
+  <button type="button" id="Face_detect">Detect</button>
+  <div id="Face_detect_result"></div>
   <script src="../faceapi.js"></script>
   <script>
     azurefaceapi.config('https://southcentralus.api.cognitive.microsoft.com/face/v1.0', '0328672ce40b421f8b2ec53b76101b19');
     
-    // azurefaceapi.Face.detect({
-    //   requestBody: {
-    //     url: 'https://rdomingo1986.blob.core.windows.net/faceapitests/25158438_10155380723572858_2206683014845430559_n.jpg'
-    //   }
-    // })
-    // .then((response) => {
-    //   console.log(response);
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // });
+    document.getElementById('Face_detect').addEventListener('click', function () {
+
+      azurefaceapi.Face.detect({
+        requestBody: {
+          url: 'https://rdomingo1986.blob.core.windows.net/faceapitests/25158438_10155380723572858_2206683014845430559_n.jpg'
+        }
+      })
+      .then((response) => {
+        document.getElementById('Face_detect_result').innerHTML = JSON.stringify(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+      
+    });
 
     // azurefaceapi.FaceList.create({
     //   requestBody: {
@@ -38,13 +44,13 @@
     //   console.log(error);
     // });
 
-    azurefaceapi.FaceList.list()
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    // azurefaceapi.FaceList.list()
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   </script>
 </body>
 </html>
