@@ -1,6 +1,4 @@
-import { AddFaceResult } from '../Domain/FaceList/AddFaceResult';
-import { GetResult } from '../Domain/FaceList/GetResult';
-import { ListResult } from '../Domain/FaceList/ListResult';
+import { AddFaceResult, GetResult, ListResult } from '../Domain/FaceList/DomainFaceList';
 
 export interface IFaceList {
   AddFaceAsync(faceListId: string, url: string, userData: string, targetFace: string): Promise<AddFaceResult>;

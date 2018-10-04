@@ -1,6 +1,7 @@
 import { IFaceList } from './Interfaces/IFaceList';
 import * as DomainFaceList from './Domain/FaceList/DomainFaceList';
 import { NotSuccessfulResponse } from './Domain/NotSuccessfulResponse';
+import fetch from 'node-fetch';
 
 export class APIReference {
   private static instance: APIReference = null;
@@ -99,7 +100,7 @@ export class FaceList implements IFaceList {
   }
 
   public async DeleteFaceAsync(faceListId: string, persistedFaceId: string): Promise<boolean> {
-    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/facelists/${faceListId}/persistedfaces${persistedFaceId}`, {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/facelists/${faceListId}/persistedfaces/${persistedFaceId}`, {
       method: 'DELETE',
       headers: {
         'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
