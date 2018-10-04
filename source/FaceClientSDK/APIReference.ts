@@ -7,6 +7,7 @@ export class APIReference {
   private static readonly padlock: Object = new Object();
   public static FaceAPIKey: string = null;
   public static FaceAPIZone: string = null;
+  public FaceList: FaceList = FaceList.Instance;
 
   constructor() {}
 

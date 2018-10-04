@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "../dist/",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "lib": [
+      "es5",
+      "es6",
+      "dom"
+    ]
+  },
+  "files": [
+    "./FaceClientSDK/APIReference"
+  ],
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "./**/*.spec.ts",
+    "../node_modules",
+    "../dist"
+  ],
+  "compileOnSave": false
+}
