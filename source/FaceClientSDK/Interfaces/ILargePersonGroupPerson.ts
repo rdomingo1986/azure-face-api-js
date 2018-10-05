@@ -1,25 +1,21 @@
-import { AddFaceResult } from '../Domain/LargePersonGroupPerson/AddFaceResult';
-import { CreateResult } from '../Domain/LargePersonGroupPerson/CreateResult';
-import { GetResult } from '../Domain/LargePersonGroupPerson/GetResult';
-import { GetFaceResult } from '../Domain/LargePersonGroupPerson/GetFaceResult';
-import { ListResult } from '../Domain/LargePersonGroupPerson/ListResult';
+import * as DomainLargePersonGroupPerson from '../Domain/LargePersonGroupPerson/DomainLargePersonGroupPerson';
 
 export interface ILargePersonGroupPerson {
-  AddFaceAsync(largePersonGroupId: string, personId: string, url: string, userData: string, targetFace: string): AddFaceResult;
+  AddFaceAsync(largePersonGroupId: string, personId: string, url: string, userData: string, targetFace: string): Promise<DomainLargePersonGroupPerson.AddFaceResult>;
 
-  CreateAsync(largePersonGroupId: string, name: string, userData: string): CreateResult;
+  CreateAsync(largePersonGroupId: string, name: string, userData: string): Promise<DomainLargePersonGroupPerson.CreateResult>;
 
-  DeleteAsync(largePersonGroupId: string, personId: string): boolean;
+  DeleteAsync(largePersonGroupId: string, personId: string): Promise<boolean>;
 
-  DeleteFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string): boolean;
+  DeleteFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string): Promise<boolean>;
 
-  GetAsync(largePersonGroupId: string, personId: string): GetResult;
+  GetAsync(largePersonGroupId: string, personId: string): Promise<DomainLargePersonGroupPerson.GetResult>;
 
-  GetFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string): GetFaceResult;
+  GetFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string): Promise<DomainLargePersonGroupPerson.GetFaceResult>;
 
-  ListAsync(largePersonGroupId: string, start: string, top: number): Array<ListResult>;
+  ListAsync(largePersonGroupId: string, start: string, top: number): Promise<Array<DomainLargePersonGroupPerson.ListResult>>;
 
-  UpdateAsync(largePersonGroupId: string, personId: string, name: string, userData: string ): boolean;
+  UpdateAsync(largePersonGroupId: string, personId: string, name: string, userData: string ): Promise<boolean>;
 
-  UpdateFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string, userData: string): boolean;
+  UpdateFaceAsync(largePersonGroupId: string, personId: string, persistedFaceId: string, userData: string): Promise<boolean>;
 }
