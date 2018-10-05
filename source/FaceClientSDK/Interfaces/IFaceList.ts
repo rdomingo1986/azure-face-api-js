@@ -1,7 +1,7 @@
-import { AddFaceResult, GetResult, ListResult } from '../Domain/FaceList/DomainFaceList';
+import * as DomainFaceList from '../Domain/FaceList/DomainFaceList';
 
 export interface IFaceList {
-  AddFaceAsync(faceListId: string, url: string, userData: string, targetFace: string): Promise<AddFaceResult>;
+  AddFaceAsync(faceListId: string, url: string, userData: string, targetFace: string): Promise<DomainFaceList.AddFaceResult>;
 
   CreateAsync(faceListId: string, name: string, userData: string): Promise<boolean>;
 
@@ -9,9 +9,9 @@ export interface IFaceList {
 
   DeleteFaceAsync(faceListId: string, persistedFaceId: string): Promise<boolean>;
 
-  GetAsync(faceListId: string): Promise<GetResult>;
+  GetAsync(faceListId: string): Promise<DomainFaceList.GetResult>;
 
-  ListAsync(): Promise<Array<ListResult>>;
+  ListAsync(): Promise<Array<DomainFaceList.ListResult>>;
 
   UpdateAsync(faceListId: string, name: string, userData: string): Promise<boolean>;
 }
