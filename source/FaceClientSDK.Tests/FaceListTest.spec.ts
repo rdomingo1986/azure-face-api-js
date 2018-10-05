@@ -13,8 +13,8 @@ describe('FaceList', () => {
 
     try {
       if(await APIReference.Instance.FaceList.CreateAsync(identifier, identifier, identifier)) {
-        let userData = new Object();
-        userData['userDataaSample'] = "User Data Sample";
+        let userData: Object = new Object();
+        userData['userDataSample'] = "User Data Sample";
         let testImageUrl: string = 'https://rdomingo1986.blob.core.windows.net/faceapitests/37357230_10155893037032858_4970212631118872576_n.jpg';
         result = await APIReference.Instance.FaceList.AddFaceAsync(identifier, testImageUrl, JSON.stringify(userData), '');
       }
@@ -61,8 +61,8 @@ describe('FaceList', () => {
     try {
       let addFaceResult: DomainFaceList.AddFaceResult = null;
       if(await APIReference.Instance.FaceList.CreateAsync(identifier, identifier, identifier)) {
-        let userData = new Object();
-        userData['userDataaSample'] = "User Data Sample";
+        let userData: Object = new Object();
+        userData['userDataSample'] = "User Data Sample";
         let testImageUrl: string = 'https://rdomingo1986.blob.core.windows.net/faceapitests/37357230_10155893037032858_4970212631118872576_n.jpg';
         addFaceResult = await APIReference.Instance.FaceList.AddFaceAsync(identifier, testImageUrl, JSON.stringify(userData), '');
         if(addFaceResult != null) {

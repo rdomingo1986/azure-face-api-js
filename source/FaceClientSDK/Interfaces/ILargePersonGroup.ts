@@ -1,19 +1,17 @@
-import { GetResult } from '../Domain/LargePersonGroup/GetResult';
-import { GetTrainingStatusResult } from '../Domain/LargePersonGroup/GetTrainingStatusResult';
-import { ListResult } from '../Domain/LargePersonGroup/ListResult';
+import * as DomainLargePersonGroup from '../Domain/LargePersonGroup/DomainLargePersonGroup';
 
 export interface ILargePersonGroup {
-  CreateAsync(largePersonGroupId: string, name: string, userData: string): boolean;
+  CreateAsync(largePersonGroupId: string, name: string, userData: string): Promise<boolean>;
 
-  DeleteAsync(largePersonGroupId: string): boolean;
+  DeleteAsync(largePersonGroupId: string): Promise<boolean>;
 
-  GetAsync(largePersonGroupId: string): GetResult;
+  GetAsync(largePersonGroupId: string): Promise<DomainLargePersonGroup.GetResult>;
 
-  GetTrainingStatusAsync(largePersonGroupId: string): GetTrainingStatusResult;
+  GetTrainingStatusAsync(largePersonGroupId: string): Promise<DomainLargePersonGroup.GetTrainingStatusResult>;
 
-  ListAsync(start: string, top: number): Array<ListResult>;
+  ListAsync(start: string, top: number): Promise<Array<DomainLargePersonGroup.ListResult>>;
 
-  TrainAsync(largePersonGroupId: string): boolean;
+  TrainAsync(largePersonGroupId: string): Promise<boolean>;
 
-  UpdateAsync(largePersonGroupId: string, name: string, userData: string): boolean;
+  UpdateAsync(largePersonGroupId: string, name: string, userData: string): Promise<boolean>;
 }

@@ -1,10 +1,12 @@
 import { IFaceList } from './Interfaces/IFaceList';
 import { ILargeFaceList } from './Interfaces/ILargeFaceList';
+import { ILargePersonGroup } from './Interfaces/ILargePersonGroup';
 import * as DomainFaceList from './Domain/FaceList/DomainFaceList';
 import * as DomainLargeFaceList from './Domain/LargeFaceList/DomainLargeFaceList';
+import * as DomainLargePersonGroup from './Domain/LargePersonGroup/DomainLargePersonGroup';
 import { NotSuccessfulResponse } from './Domain/NotSuccessfulResponse';
 // solo para pruebas unitarias
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 
 export class APIReference {
   private static instance: APIReference = null;
@@ -12,7 +14,8 @@ export class APIReference {
   public static FaceAPIKey: string = null;
   public static FaceAPIZone: string = null;
   public FaceList: FaceList = FaceList.Instance;
-  public LargeFaceList: LargeFaceList = LargeFaceList.Instance; 
+  public LargeFaceList: LargeFaceList = LargeFaceList.Instance;
+  public LargePersonGroup: LargePersonGroup = LargePersonGroup.Instance;
 
   constructor() {}
 
@@ -371,7 +374,7 @@ export class LargeFaceList implements ILargeFaceList {
     body['userData'] = userData;
 
     let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largefacelists/${largeFaceListId}`, {
-      method: 'POST',
+      method: 'PATCH',
       headers: {
         'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey,
         'Content-Type': 'application/json'
@@ -392,7 +395,152 @@ export class LargeFaceList implements ILargeFaceList {
     body['userData'] = userData;
 
     let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largefacelists/${largeFaceListId}/persistedfaces/${persistedFaceId}`, {
+      method: 'PATCH',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return true;
+  }
+}
+
+export class LargePersonGroup implements ILargePersonGroup {
+  private static instance: LargePersonGroup = null;
+  private static readonly padlock: Object = new Object();
+
+  constructor() {
+    if(APIReference.FaceAPIKey == null || APIReference.FaceAPIKey.length == 0) {
+      throw new Error('FaceAPIKey required by: APIReference.FaceAPIKey');
+    }
+    if(APIReference.FaceAPIZone == null || APIReference.FaceAPIZone.length == 0) {
+      throw new Error('FaceAPIZone required by: APIReference.FaceAPIZone');
+    }
+  }
+
+  public static get Instance(): LargePersonGroup {
+    if(this.instance == null) {
+      this.instance = new LargePersonGroup();
+    }
+    return this.instance;
+  }
+
+  public async CreateAsync(largePersonGroupId: string, name: string, userData: string): Promise<boolean> {
+    let body: Object = new Object();
+    body['name'] = name;
+    body['userData'] = userData;
+
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}`, {
+      method: 'PUT',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return true;
+  }
+
+  public async DeleteAsync(largePersonGroupId: string): Promise<boolean> {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}`, {
+      method: 'DELETE',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
+      }
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return true;
+  }
+
+  public async GetAsync(largePersonGroupId: string): Promise<DomainLargePersonGroup.GetResult> {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}`, {
+      method: 'GET',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
+      }
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return await response.json();
+  }
+
+  public async GetTrainingStatusAsync(largePersonGroupId: string): Promise<DomainLargePersonGroup.GetTrainingStatusResult> {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}/training`, {
+      method: 'GET',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
+      }
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return await response.json();
+  }
+
+  public async ListAsync(start: string, top: number): Promise<Array<DomainLargePersonGroup.ListResult>> {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups?start=${start}&top=${top}`, {
+      method: 'GET',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
+      }
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return await response.json();
+  }
+
+  public async TrainAsync(largePersonGroupId: string): Promise<boolean> {
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}/train`, {
       method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey
+      }
+    });
+    
+    if(!response.ok) {
+      let fex: NotSuccessfulResponse = await response.json();
+      throw new Error(`${fex.error.code} - ${fex.error.message}`);
+    }
+
+    return true;
+  }
+
+  public async UpdateAsync(largePersonGroupId: string, name: string, userData: string): Promise<boolean> {
+    let body: Object = new Object();
+    body['name'] = name;
+    body['userData'] = userData;
+
+    let response: Response = await fetch(`https://${APIReference.FaceAPIZone}.api.cognitive.microsoft.com/face/v1.0/largepersongroups/${largePersonGroupId}`, {
+      method: 'PATCH',
       headers: {
         'Ocp-Apim-Subscription-Key': APIReference.FaceAPIKey,
         'Content-Type': 'application/json'
