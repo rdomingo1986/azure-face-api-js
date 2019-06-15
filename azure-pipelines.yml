@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: 'npm run install'
+- script: 'npm install'
   displayName: 'Install'
 
 - script: 'npm run compile'
