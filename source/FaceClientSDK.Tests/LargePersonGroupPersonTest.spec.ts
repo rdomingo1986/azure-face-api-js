@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 import { APIReference } from '../FaceClientSDK/APIReference';
 import * as DomainLargePersonGroupPerson from '../FaceClientSDK/Domain/LargePersonGroupPerson/DomainLargePersonGroupPerson';
 
-APIReference.FaceAPIKey = '4e032a4875ff4bb08853aad50d8b0340';
+APIReference.FaceAPIKey = process.env.FACEAPI_KEY;
 APIReference.FaceAPIZone = 'southcentralus';
 
 describe('LargePersonGroupPerson', () => {

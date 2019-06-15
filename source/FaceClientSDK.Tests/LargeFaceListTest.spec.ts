@@ -4,7 +4,7 @@ import { msleep } from 'sleep';
 import { APIReference } from '../FaceClientSDK/APIReference';
 import * as DomainLargeFaceList from '../FaceClientSDK/Domain/LargeFaceList/DomainLargeFaceList';
 
-APIReference.FaceAPIKey = '4e032a4875ff4bb08853aad50d8b0340';
+APIReference.FaceAPIKey = process.env.FACEAPI_KEY;
 APIReference.FaceAPIZone = 'southcentralus';
 
 describe('LargeFaceList', () => {
