@@ -15,5 +15,3 @@ steps:
   
 - script: 'npm run ts-test'
   displayName: 'Test'
-  inputs:
-    FACEAPI_KEY: '4e032a4875ff4bb08853aad50d8b0340'
