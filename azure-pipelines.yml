@@ -12,9 +12,6 @@ pool:
 steps:
 - script: 'npm install'
   displayName: 'Install'
-
-- script: 'npm run compile'
-  displayName: 'Compile'
   
 - script: 'npm run ts-test'
   displayName: 'Test'
