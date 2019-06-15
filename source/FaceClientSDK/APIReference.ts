@@ -10,7 +10,7 @@ import * as DomainLargePersonGroup from './Domain/LargePersonGroup/DomainLargePe
 import * as DomainLargePersonGroupPerson from './Domain/LargePersonGroupPerson/DomainLargePersonGroupPerson';
 import { NotSuccessfulResponse } from './Domain/NotSuccessfulResponse';
 // solo para pruebas unitarias
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 
 export class APIReference {
   private static instance: APIReference = null;
