@@ -3,7 +3,7 @@ import { Guid } from "guid-typescript";
 import { APIReference } from '../FaceClientSDK/APIReference';
 import * as DomainFace from '../FaceClientSDK/Domain/Face/DomainFace';
 
-APIReference.FaceAPIKey = '0328672ce40b421f8b2ec53b76101b19';
+APIReference.FaceAPIKey = '4e032a4875ff4bb08853aad50d8b0340';
 APIReference.FaceAPIZone = 'southcentralus';
 
 describe('Face', () => {
