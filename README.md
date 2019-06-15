@@ -2,4 +2,4 @@
 
 Azure Face API JavaScript SDK
 
-[![Build Status](https://dev.azure.com/domingo0254/Curso/_apis/build/status/rdomingo1986.azure-face-api-js?branchName=master)](https://dev.azure.com/domingo0254/Curso/_build/latest?definitionId=4&branchName=master)
+[![Build Status](https://dev.azure.com/drmingo86/Azure%20Face%20API%20SDK/_apis/build/status/Azure%20Face%20API%20SDK-CI?branchName=master)](https://dev.azure.com/drmingo86/Azure%20Face%20API%20SDK/_build/latest?definitionId=1&branchName=master)
