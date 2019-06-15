@@ -11,7 +11,7 @@ import * as DomainLargePersonGroupPerson from './Domain/LargePersonGroupPerson/D
 import { NotSuccessfulResponse } from './Domain/NotSuccessfulResponse';
 // solo para pruebas unitarias
 import fetch from 'node-fetch';
-
+// comentario
 export class APIReference {
   private static instance: APIReference = null;
   private static readonly padlock: Object = new Object();
