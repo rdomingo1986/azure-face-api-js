@@ -15,3 +15,6 @@ steps:
   
 - script: 'npm run ts-test'
   displayName: 'Test'
+
+- script: 'npm run compile'
+  displayName: 'Compile'
