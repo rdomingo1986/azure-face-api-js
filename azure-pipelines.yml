@@ -18,3 +18,19 @@ steps:
 
 - script: 'npm run compile'
   displayName: 'Compile'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: './dist/*'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: './dist/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: './dist/$(Build.BuildId).zip'
+    azureSubscription: 'Visual Studio Enterprise (1c86dc94-8e3e-4987-9835-1e8fa91876a9)'
+    Destination: 'AzureBlob'
+    storage: 'rdomingo1986'
+    ContainerName: 'dbbackups'
