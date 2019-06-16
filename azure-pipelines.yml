@@ -13,8 +13,8 @@ steps:
 - script: 'npm install'
   displayName: 'Install'
   
-- script: 'npm run ts-test'
-  displayName: 'Test'
+#- script: 'npm run ts-test'
+#  displayName: 'Test'
 
 - script: 'npm run compile'
   displayName: 'Compile'
