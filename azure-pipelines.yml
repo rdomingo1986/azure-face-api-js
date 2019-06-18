@@ -27,6 +27,11 @@ steps:
     archiveFile: './dist/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
+- task: Npm@1
+  inputs:
+    command: publish
+    publishEndpoint: 'https://pkgs.dev.azure.com/allincloudservices/_packaging/Artifacts/npm/registry/'
+
 #- task: AzureFileCopy@3
 #  inputs:
 #    SourcePath: './dist/$(Build.BuildId).zip'
