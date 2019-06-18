@@ -19,9 +19,9 @@ steps:
 - script: 'npm run ts-test'
   displayName: 'Test'
 
-- task: Npm@1
+- task: PublishBuildArtifacts@1
   inputs:
-    command: 'publish'
-    publishRegistry: 'useFeed'
-    publishFeed: '9f63ea7a-8eba-4d9c-a3bb-a09abfad20a8'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
