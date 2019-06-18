@@ -14,7 +14,7 @@ steps:
   inputs:
     command: 'install'
     customRegistry: 'useFeed'
-    customFeed: '9f63ea7a-8eba-4d9c-a3bb-a09abfad20a8'
+    customFeed: '56108938-621c-43ca-b534-98099cba16b7'
   
 - task: CmdLine@2
   inputs:
