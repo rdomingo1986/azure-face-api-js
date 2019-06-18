@@ -19,6 +19,12 @@ steps:
 - script: 'npm run ts-test'
   displayName: 'Test'
 
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '.'
+    Contents: '**'
+    TargetFolder: '.'
+    
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
