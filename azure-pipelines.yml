@@ -19,6 +19,10 @@ steps:
 - script: 'npm run ts-test'
   displayName: 'Test'
 
+- task: CmdLine@2
+  inputs:
+    script: 'rm -R node_modules && rm -R .git'
+
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(system.DefaultWorkingDirectory)'
