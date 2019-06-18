@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-lastest'
+  vmImage: 'ubuntu-16.04'
 
 steps:
 - script: 'npm install'
