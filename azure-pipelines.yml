@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'ubuntu-lastest'
 
 steps:
 - script: 'npm install'
@@ -27,10 +27,10 @@ steps:
     archiveFile: './dist/$(Build.BuildId).zip'
     replaceExistingArchive: true
 
-- task: AzureFileCopy@3
-  inputs:
-    SourcePath: './dist/$(Build.BuildId).zip'
-    azureSubscription: 'Visual Studio Enterprise (1c86dc94-8e3e-4987-9835-1e8fa91876a9)'
-    Destination: 'AzureBlob'
-    storage: 'rdomingo1986'
-    ContainerName: 'dbbackups'
+#- task: AzureFileCopy@3
+#  inputs:
+#    SourcePath: './dist/$(Build.BuildId).zip'
+#    azureSubscription: 'Visual Studio Enterprise (1c86dc94-8e3e-4987-9835-1e8fa91876a9)'
+#    Destination: 'AzureBlob'
+#    storage: 'rdomingo1986'
+#    ContainerName: 'dbbackups'
