@@ -13,19 +13,8 @@ steps:
 - script: 'npm install'
   displayName: 'Install'
   
-#- script: 'npm run ts-test'
-#  displayName: 'Test'
-
-- script: 'npm run compile'
-  displayName: 'Compile'
-
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: './dist'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: './dist/$(Build.BuildId).zip'
-    replaceExistingArchive: true
+- script: 'npm run ts-test'
+  displayName: 'Test'
 
 - task: Npm@1
   inputs:
@@ -33,10 +22,3 @@ steps:
     publishRegistry: 'useFeed'
     publishFeed: '3c25275a-7adf-43f1-9b7a-7347d4f4b194'
 
-#- task: AzureFileCopy@3
-#  inputs:
-#    SourcePath: './dist/$(Build.BuildId).zip'
-#    azureSubscription: 'Visual Studio Enterprise (1c86dc94-8e3e-4987-9835-1e8fa91876a9)'
-#    Destination: 'AzureBlob'
-#    storage: 'rdomingo1986'
-#    ContainerName: 'dbbackups'
