@@ -30,7 +30,7 @@ steps:
 - task: Npm@1
   inputs:
     command: publish
-    publishEndpoint: 'https://pkgs.dev.azure.com/allincloudservices/_packaging/Artifacts/npm/:_password=eGNvbTViYjUzY3plZTNleHo1a3F1NG9pMmlubDM1cXR0cnNoYWRwbjRvYjIydWt5Z2FxYQ=='
+    publishEndpoint: 'https://pkgs.dev.azure.com/allincloudservices/_packaging/Artifacts/npm/registry'
 
 #- task: AzureFileCopy@3
 #  inputs:
