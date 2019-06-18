@@ -16,8 +16,9 @@ steps:
     customRegistry: 'useFeed'
     customFeed: '9f63ea7a-8eba-4d9c-a3bb-a09abfad20a8'
   
-- script: 'npm run ts-test'
-  displayName: 'Test'
+- task: CmdLine@2
+  inputs:
+    script: 'npm run ts-test'
 
 - task: CmdLine@2
   inputs:
